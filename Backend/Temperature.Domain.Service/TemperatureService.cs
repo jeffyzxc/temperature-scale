@@ -7,7 +7,7 @@ namespace Temperature.Domain.Service
         private const int MinCelsius = -30;
         private const int MaxCelsius = 200;
 
-        public int Convert(int value, TemperatureTypeEnum temperatureType)
+        public double Convert(double value, TemperatureTypeEnum temperatureType)
         {
             if (temperatureType == TemperatureTypeEnum.CelciusToFarenheight)
             {
@@ -24,17 +24,17 @@ namespace Temperature.Domain.Service
         }
 
 
-        private int ConvertFahrenheitToCelsius(int fahrenheit)
+        private double ConvertFahrenheitToCelsius(double fahrenheit)
         {
-            return (int)Math.Round((fahrenheit - 32) * (5.0 / 9.0));
+            return Math.Round((double)(fahrenheit - 32) * (5.0 / 9.0), 2, MidpointRounding.AwayFromZero);
         }
 
-        private int ConvertCelsiusToFahrenheit(int celsius)
+        private double ConvertCelsiusToFahrenheit(double celsius)
         {
-            return (int)Math.Round((celsius * (9.0 / 5.0)) + 32);
+            return Math.Round((double)(celsius * (9.0 / 5.0)) + 32, 2, MidpointRounding.AwayFromZero);
         }
 
-        private void ValidateTemperatureRange(int temperature, int min, int max)
+        private void ValidateTemperatureRange(double temperature, int min, int max)
         {
             if (temperature < min || temperature > max)
             {

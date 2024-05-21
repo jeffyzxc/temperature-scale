@@ -121,7 +121,7 @@ export class TemperatureScaleChartComponent implements AfterViewInit, ControlVal
     const newBarHeight = Math.min(Math.max(gaugeHeight - mouseY, 0), gaugeHeight);
     const newCelsius = (newBarHeight / gaugeHeight) * 230 - 30;
     this.drawGauge(newCelsius);
-    this.onChange(newCelsius);
+    this.onChange(Number(newCelsius).toFixed(2));
   }
 
   ngOnDestroy(): void {

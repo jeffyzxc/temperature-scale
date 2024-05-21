@@ -18,7 +18,7 @@ namespace Temperature.API.Controllers
 
 
         [HttpGet()]
-        public int Get([FromQuery] GetTemperatureModel request)
+        public double Get([FromQuery] GetTemperatureModel request)
         {
             return _temperatureService.Convert(request.Value, request.type);
         }

@@ -14,6 +14,6 @@ namespace Temperature.Domain.Service.Interface
 
     public interface ITemperatureService
     {
-        int Convert(int value, TemperatureTypeEnum temperatureType);
+        double Convert(double value, TemperatureTypeEnum temperatureType);
     }
 }

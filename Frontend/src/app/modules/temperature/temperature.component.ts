@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TemperatureScaleChartComponent } from './component/formControl/temperature-scale-chart/temperature-scale-chart.component';
 import { TemperatureDataService } from './service/temperature.data.service';
-import { Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { Subject, debounceTime, switchMap, takeUntil, tap } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TemperatureTypeEnum } from '../../core/service/interface/temperature.interface';
 import { CommonModule } from '@angular/common';
-import { temperatureRangeValidator } from './validators/temperatureRangeValidator';
+import { celciusToFarenheitRangeValidator, farenheightToCelciusValidator } from './validators/temperatureRangeValidator';
 
 @Component({
   selector: 'app-temperature',
@@ -23,7 +23,6 @@ import { temperatureRangeValidator } from './validators/temperatureRangeValidato
 })
 export class TemperatureComponent implements OnInit, OnDestroy {
 
-  result = 0;
   isBarDragging: boolean = false;
 
   TemperatureTypeEnum = TemperatureTypeEnum;
@@ -41,52 +40,46 @@ export class TemperatureComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.temperatureFormGroup = this.fb.group({
-      temperature: [32, temperatureRangeValidator.bind(this)],
-      temperatureType: ['0',  temperatureRangeValidator.bind(this)],
+      celciusToFarenheit: [32, celciusToFarenheitRangeValidator.bind(this)],
+      farenheitToCelcius: [0, farenheightToCelciusValidator.bind(this)]
     });
 
-    this.temperatureFormGroup.valueChanges.pipe(
+    this.temperatureFormGroup.get('celciusToFarenheit')?.valueChanges.pipe(
       takeUntil(this._destroyer$)
     ).subscribe((data) => {
-      if(data['temperature']?.toString())
-        this.onChangeValueChange(+data['temperatureType'], +data['temperature']);
+      this.onChangeValueChange(TemperatureTypeEnum.CelciusToFarenheight, data)
     });
 
-    this.temperatureFormGroup?.get('temperatureType')?.valueChanges.pipe(
+    this.temperatureFormGroup.get('farenheitToCelcius')?.valueChanges.pipe(
       takeUntil(this._destroyer$)
-    ).subscribe(() => {
-      const temp = this.result;
-      this.result = this.temperatureFormControlValue;
-      this.temperatureFormGroup?.get('temperature')?.setValue(temp);
+    ).subscribe((data) => {
+      this.onChangeValueChange(TemperatureTypeEnum.FahrenheitToCelcius, data)
     });
 
     this.temperatureBarFormControl.valueChanges.pipe(
       takeUntil(this._destroyer$),
-      switchMap((data) => this.onBarValueChange(parseInt(data) ))
+      switchMap((data) => this.onBarValueChange(data))
     ).subscribe();
   }
 
   onBarValueChange(data: number) {
     return this.temperatureDataService.fetch({type: TemperatureTypeEnum.CelciusToFarenheight, value: data}).pipe(tap(((result) => {
-      if(TemperatureTypeEnum.CelciusToFarenheight === +this.temperatureTypeFormControlValue)  {
-          this.temperatureFormGroup?.get('temperature')?.setValue(data);
-          this.result = result;
-      } else {
-          this.result = data;
-          this.temperatureFormGroup?.get('temperature')?.setValue(result);
-        }
+        this.temperatureFormGroup?.get('celciusToFarenheit')?.setValue(+data, {onlySelf: true, emitEvent: false});
+        this.temperatureFormGroup?.get('farenheitToCelcius')?.setValue(+result, {onlySelf: true, emitEvent: false});
     })))
   }
 
   onChangeValueChange(type: TemperatureTypeEnum, value: number) {
-    if(!this.temperatureFormGroup.valid || this.isBarDragging) return;
     this.temperatureDataService.fetch({type, value}).subscribe((data) =>{
-      this.result = data;
 
-      if(TemperatureTypeEnum.CelciusToFarenheight === +this.temperatureTypeFormControlValue)  {
-        this.temperatureBarFormControl.setValue(value, {onlySelf: true, emitEvent: false})
-      } else {
-        this.temperatureBarFormControl.setValue(data, {onlySelf: true, emitEvent: false})
+      if(TemperatureTypeEnum.CelciusToFarenheight === +type && this.temperatureFormGroup.get('celciusToFarenheit')?.valid)  {
+        this.temperatureFormGroup?.get('celciusToFarenheit')?.setValue(+value, {onlySelf: true, emitEvent: false});
+        this.temperatureFormGroup?.get('farenheitToCelcius')?.setValue(+data, {onlySelf: true, emitEvent: false});
+        this.temperatureBarFormControl.setValue(+value, {onlySelf: true, emitEvent: false});
+      } else if(this.temperatureFormGroup.get('farenheitToCelcius')?.valid){
+        this.temperatureFormGroup?.get('celciusToFarenheit')?.setValue(+data, {onlySelf: true, emitEvent: false});
+        this.temperatureFormGroup?.get('farenheitToCelcius')?.setValue(+value, {onlySelf: true, emitEvent: false});
+        this.temperatureBarFormControl.setValue(+data, {onlySelf: true, emitEvent: false});
       }
     });
   }
