@@ -27,6 +27,6 @@
 
   </div>
   <div class="temperature-container">
-    <app-temperature-scale-chart [formControl]="temperatureBarFormControl"></app-temperature-scale-chart>
+    <app-temperature-scale-chart [formControl]="temperatureBarFormControl" (isDragging)="onDraggingChart($event)"></app-temperature-scale-chart>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, forwardRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, Output, forwardRef } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -22,8 +22,9 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class TemperatureScaleChartComponent implements AfterViewInit, ControlValueAccessor, OnDestroy  {
   formControl: FormControl = new FormControl();
-
   private _onDestroy$: Subject<boolean> = new Subject();
+
+  @Output() isDragging: EventEmitter<boolean> = new EventEmitter();
 
   writeValue(value: number): void {
     this.formControl.setValue(value);
@@ -44,6 +45,7 @@ export class TemperatureScaleChartComponent implements AfterViewInit, ControlVal
 
     document.getElementById("gauge")!.addEventListener("mousedown", (event) => {
       isDragging = true;
+      this.isDragging.next(isDragging);
       this.updateGauge(event);
     });
 
@@ -55,6 +57,7 @@ export class TemperatureScaleChartComponent implements AfterViewInit, ControlVal
 
     document.addEventListener("mouseup", () => {
       isDragging = false;
+      this.isDragging.next(isDragging);
     });
 
 

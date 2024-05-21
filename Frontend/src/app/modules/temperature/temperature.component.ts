@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TemperatureScaleChartComponent } from './component/formControl/temperature-scale-chart/temperature-scale-chart.component';
 import { TemperatureDataService } from './service/temperature.data.service';
-import { Subject, Subscription, switchMap, takeUntil, tap } from 'rxjs';
+import { Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TemperatureTypeEnum } from '../../core/service/interface/temperature.interface';
@@ -24,6 +24,7 @@ import { temperatureRangeValidator } from './validators/temperatureRangeValidato
 export class TemperatureComponent implements OnInit, OnDestroy {
 
   result = 0;
+  isBarDragging: boolean = false;
 
   TemperatureTypeEnum = TemperatureTypeEnum;
 
@@ -78,7 +79,7 @@ export class TemperatureComponent implements OnInit, OnDestroy {
   }
 
   onChangeValueChange(type: TemperatureTypeEnum, value: number) {
-    if(!this.temperatureFormGroup.valid) return;
+    if(!this.temperatureFormGroup.valid || this.isBarDragging) return;
     this.temperatureDataService.fetch({type, value}).subscribe((data) =>{
       this.result = data;
 
@@ -88,6 +89,10 @@ export class TemperatureComponent implements OnInit, OnDestroy {
         this.temperatureBarFormControl.setValue(data, {onlySelf: true, emitEvent: false})
       }
     });
+  }
+
+  onDraggingChart(isDragging: boolean) {
+    this.isBarDragging = isDragging;
   }
 
   get temperatureFormControlValue() {
