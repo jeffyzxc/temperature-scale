@@ -5,9 +5,8 @@
 
 # How to use
 
-1. To convert Fahrenheit to Celsius and vice versa, first select a conversion type in the dropdown box.
-2. Input a value.
-3. The converted value will be displayed beside the input field.
+1. To convert Fahrenheit to Celsius and vice versa, Input a value in respective field.
+3. The converted value will be reflected in the input field and temperature chart.
 4. You can also drag the red bar to adjust the value.
 
 # Installation
