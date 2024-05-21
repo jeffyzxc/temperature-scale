@@ -1,6 +1,6 @@
 # Preview 
 
-![image](https://github.com/jeffyzxc/temperature-scale/assets/25240940/cb0193e4-0cfd-4acd-9d06-a22c28526d30)
+![image](https://github.com/jeffyzxc/temperature-scale/assets/25240940/f6e1a51e-34a6-4732-9a12-ce24fa22cd5c)
 
 
 # How to use
