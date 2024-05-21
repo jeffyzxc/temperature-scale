@@ -1,0 +1,32 @@
+<div class="container">
+  <div>
+    <form [formGroup]="temperatureFormGroup" class="formGroup-container">
+      <div>
+        <select class="form-select" formControlName="temperatureType">
+          <option value="0">Farenheight to Celcius</option>
+          <option value="1">Celcius to Farenheight</option>
+        </select>
+      </div>
+
+      <div class="flex">
+        <input type="number" class="form-control" style="width: 500px;" [ngClass]="{'is-invalid': temperatureFormGroup.get('temperature')?.errors}" formControlName="temperature">
+        <div id="validationServer03Feedback" class="invalid-feedback" *ngIf="temperatureFormGroup.get('temperature')?.errors">
+          {{ temperatureFormGroup.get('temperature')?.errors!['temperatureRange']}}
+        </div>
+      </div>
+
+      <div *ngIf="!temperatureFormGroup.get('temperature')?.errors">
+        <div *ngIf="+temperatureTypeFormControlValue === +TemperatureTypeEnum.FahrenheitToCelcius">
+          Result: {{result}}°
+        </div>
+        <div *ngIf="+temperatureTypeFormControlValue === +TemperatureTypeEnum.CelciusToFarenheight">
+          Result: {{result}}F
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <div class="temperature-container">
+    <app-temperature-scale-chart [formControl]="temperatureBarFormControl"></app-temperature-scale-chart>
+  </div>
+</div>

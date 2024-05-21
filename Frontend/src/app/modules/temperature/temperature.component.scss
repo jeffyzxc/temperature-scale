@@ -1,0 +1,18 @@
+:host {
+  .temperature-container {
+    margin-top: 20px;
+  }
+
+  .container {
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .formGroup-container {
+    display: flex;
+    gap: 15px;
+  }
+}
