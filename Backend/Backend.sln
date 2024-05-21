@@ -7,13 +7,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Temperature", "Temperature", "{9FFA8444-9C67-41E0-B441-62F78985EFAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Temperature.API", "Temperature.API\Temperature.API.csproj", "{1400760E-661D-4BEA-82A8-BEEDB2FAA862}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Temperature.API", "Temperature.API\Temperature.API.csproj", "{1400760E-661D-4BEA-82A8-BEEDB2FAA862}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Temperature.Domain.Service", "Temperature.Domain.Service\Temperature.Domain.Service.csproj", "{E8446515-C11B-4A4C-AF13-F3D79E40421F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Temperature.Domain.Service", "Temperature.Domain.Service\Temperature.Domain.Service.csproj", "{E8446515-C11B-4A4C-AF13-F3D79E40421F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{D2EAE59B-6A05-4E83-9B3E-41283B52165C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D2EAE59B-6A05-4E83-9B3E-41283B52165C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Temperature.Domain.Service.Tests", "Temperature.Domain.Service.Tests\Temperature.Domain.Service.Tests.csproj", "{6898BB48-4393-4DA0-A648-A73AFA1A122C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Temperature.Domain.Service.Tests", "Temperature.Domain.Service.Tests\Temperature.Domain.Service.Tests.csproj", "{6898BB48-4393-4DA0-A648-A73AFA1A122C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
