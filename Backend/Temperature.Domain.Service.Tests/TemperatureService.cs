@@ -17,11 +17,11 @@ namespace Temperature.Domain.Service.Tests
         public void Convert_CelsiusToFahrenheit_InRange_ReturnsCorrectValue()
         {
             // Arrange
-            int celsiusValue = 100;
-            int expectedFahrenheit = 212;
+            double celsiusValue = 100;
+            double expectedFahrenheit = 212;
 
             // Act
-            int actualFahrenheit = _service.Convert(celsiusValue, TemperatureTypeEnum.CelciusToFarenheight);
+            double actualFahrenheit = _service.Convert(celsiusValue, TemperatureTypeEnum.CelciusToFarenheight);
 
             // Assert
             Assert.Equal(expectedFahrenheit, actualFahrenheit);
@@ -31,11 +31,11 @@ namespace Temperature.Domain.Service.Tests
         public void Convert_FahrenheitToCelsius_InRange_ReturnsCorrectValue()
         {
             // Arrange
-            int fahrenheitValue = 212;
-            int expectedCelsius = 100;
+            double fahrenheitValue = 212;
+            double expectedCelsius = 100;
 
             // Act
-            int actualCelsius = _service.Convert(fahrenheitValue, TemperatureTypeEnum.FahrenheitToCelcius);
+            double actualCelsius = _service.Convert(fahrenheitValue, TemperatureTypeEnum.FahrenheitToCelcius);
 
             // Assert
             Assert.Equal(expectedCelsius, actualCelsius);
@@ -45,7 +45,7 @@ namespace Temperature.Domain.Service.Tests
         public void Convert_BelowMinimumCelsius_ThrowsArgumentOutOfRangeException()
         {
             // Arrange
-            int value = -31;
+            double value = -31;
             TemperatureTypeEnum temperatureType = TemperatureTypeEnum.CelciusToFarenheight;
 
             // Act & Assert
@@ -55,7 +55,7 @@ namespace Temperature.Domain.Service.Tests
         [Fact]
         public void Convert_AboveMaximumCelsius_ThrowsArgumentOutOfRangeException()
         {
-            int value = 201;
+            double value = 201;
             TemperatureTypeEnum temperatureType = TemperatureTypeEnum.CelciusToFarenheight;
 
             Assert.Throws<ArgumentOutOfRangeException>(() => _service.Convert(value, temperatureType));
