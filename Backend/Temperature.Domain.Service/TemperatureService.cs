@@ -26,12 +26,12 @@ namespace Temperature.Domain.Service
 
         private int ConvertFahrenheitToCelsius(int fahrenheit)
         {
-            return (int)((fahrenheit - 32) * (5.0 / 9.0));
+            return (int)Math.Round((fahrenheit - 32) * (5.0 / 9.0));
         }
 
         private int ConvertCelsiusToFahrenheit(int celsius)
         {
-            return (int)((celsius * (9.0 / 5.0)) + 32);
+            return (int)Math.Round((celsius * (9.0 / 5.0)) + 32);
         }
 
         private void ValidateTemperatureRange(int temperature, int min, int max)
