@@ -26,7 +26,7 @@ Temperature scale project is built by following technologies
 1. Clone or download the project
 
 #### Backend
-1. Open Visual Studio
+1. Open Visual Studio, Open a Project or Solution
 2. Navigate to the Backend folder, Click the **Backend.sln**
 2. Set **Temperature.API** as a startup project
 3. Press F5 to run the project or from toolbar select Debug -> StartDebugging
