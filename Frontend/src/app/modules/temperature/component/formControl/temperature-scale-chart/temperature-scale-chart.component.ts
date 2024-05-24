@@ -74,8 +74,6 @@ export class TemperatureScaleChartComponent implements AfterViewInit, ControlVal
     const width = canvas.width;
     const height = canvas.height;
 
-    console.log(height);
-
     ctx.clearRect(0, 0, width, height);
 
     const gaugeWidth = 30;
@@ -121,10 +119,6 @@ export class TemperatureScaleChartComponent implements AfterViewInit, ControlVal
       ctx.fillText(i + "°F", gaugeX + gaugeWidth + 10, tickY + 5);
     }
   }
-
-
-
-
 
   updateGauge(event: MouseEvent) {
     const canvas = document.getElementById("gauge") as HTMLCanvasElement;
