@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TemperatureScaleChartComponent } from './component/formControl/temperature-scale-chart/temperature-scale-chart.component';
 import { TemperatureDataService } from './service/temperature.data.service';
-import { Subject, debounceTime, switchMap, takeUntil, tap } from 'rxjs';
+import { Subject, debounceTime, startWith, switchMap, takeUntil, tap } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TemperatureTypeEnum } from '../../core/service/interface/temperature.interface';
@@ -40,11 +40,12 @@ export class TemperatureComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.temperatureFormGroup = this.fb.group({
-      celciusToFarenheit: [32, celciusToFarenheitRangeValidator.bind(this)],
-      farenheitToCelcius: [0, farenheightToCelciusValidator.bind(this)]
+      celciusToFarenheit: [52, celciusToFarenheitRangeValidator.bind(this)],
+      farenheitToCelcius: [, farenheightToCelciusValidator.bind(this)]
     });
 
     this.temperatureFormGroup.get('celciusToFarenheit')?.valueChanges.pipe(
+      startWith(this.temperatureFormGroup.get('celciusToFarenheit')?.value),
       takeUntil(this._destroyer$)
     ).subscribe((data) => {
       this.onChangeValueChange(TemperatureTypeEnum.CelciusToFarenheight, data)

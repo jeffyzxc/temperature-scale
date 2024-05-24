@@ -69,9 +69,12 @@ export class TemperatureScaleChartComponent implements AfterViewInit, ControlVal
 
   drawGauge(celsius: number) {
     const canvas = document.getElementById("gauge") as HTMLCanvasElement;
+    canvas.height = Math.min(document.body.clientHeight - 200, 800);
     const ctx = canvas.getContext("2d")!;
     const width = canvas.width;
     const height = canvas.height;
+
+    console.log(height);
 
     ctx.clearRect(0, 0, width, height);
 

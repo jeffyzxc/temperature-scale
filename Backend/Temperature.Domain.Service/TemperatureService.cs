@@ -23,7 +23,6 @@ namespace Temperature.Domain.Service
             }
         }
 
-
         private double ConvertFahrenheitToCelsius(double fahrenheit)
         {
             return Math.Round((double)(fahrenheit - 32) * (5.0 / 9.0), 2, MidpointRounding.AwayFromZero);

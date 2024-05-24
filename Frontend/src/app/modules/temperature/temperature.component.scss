@@ -1,6 +1,7 @@
 :host {
   .temperature-container {
     margin-top: 20px;
+    flex-grow: 1;
   }
 
   .container {
@@ -9,6 +10,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100%;
   }
 
   .formGroup-container {
