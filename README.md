@@ -23,19 +23,21 @@ Temperature scale project is built by following technologies
 4. SCSS
 
 ### Setup
+1. Clone or download the project
 
 #### Backend
-1. Navigate to the backend folder
-2. Open the app.settings.json
-3. Go to Temperature.API
-3. Run the project
+1. Open Visual Studio
+2. Navigate to the Backend folder, Click the **Backend.sln**
+2. Set **Temperature.API** as a startup project
+3. Press F5 to run the project or from toolbar select Debug -> StartDebugging
 
 #### Frontend
-1. Navigate to the frontend folder.
+1. Navigate to the Frontend folder.
+2. Right click and click Open In Terminal
 2. Install dependencies using npm: npm install
 3. Update the apiUrl property in the **Frontend/src/environments/environment.ts** file.
 4. Start the development server using ng serve: ng serve
 
 #### To run the unit test
-1. Go to Tests Folder
+1. Navigate to the Tests Folder
 2. Right click and run **Temperature.Domain.Service.Tests**
