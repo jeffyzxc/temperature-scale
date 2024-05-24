@@ -40,7 +40,7 @@ export class TemperatureComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.temperatureFormGroup = this.fb.group({
-      celciusToFarenheit: [52, celciusToFarenheitRangeValidator.bind(this)],
+      celciusToFarenheit: [0, celciusToFarenheitRangeValidator.bind(this)],
       farenheitToCelcius: [, farenheightToCelciusValidator.bind(this)]
     });
 

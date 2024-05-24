@@ -88,6 +88,12 @@ export class TemperatureScaleChartComponent implements AfterViewInit, ControlVal
 
     const barHeight = (celsius + 30) / 230 * gaugeHeight;
     ctx.fillStyle = "#ff0000";
+
+    if(celsius <= 10) ctx.fillStyle = "blue";
+    else if(celsius >10 && celsius <= 19) ctx.fillStyle = "lightblue";
+    else if(celsius >20 && celsius <= 25) ctx.fillStyle = "orange";
+    else ctx.fillStyle = "red";
+
     ctx.fillRect(gaugeX, gaugeY + gaugeHeight - barHeight, gaugeWidth, barHeight);
 
     ctx.fillStyle = "#000";
@@ -96,11 +102,11 @@ export class TemperatureScaleChartComponent implements AfterViewInit, ControlVal
       const tickY = gaugeY + gaugeHeight - ((i + 30) / 230) * gaugeHeight;
 
       if(i <= 10) ctx.fillStyle = "blue";
+      else if(i >=10 && i <= 19) ctx.fillStyle = "lightblue";
       else if(i >=20 && i <= 25) ctx.fillStyle = "orange";
       else ctx.fillStyle = "red";
 
       ctx.fillText(i + "°C", gaugeX - 45, tickY + 5);
-
     }
 
     for (let i = -22; i <= 392; i += 50) {
@@ -108,12 +114,17 @@ export class TemperatureScaleChartComponent implements AfterViewInit, ControlVal
       const tickY = gaugeY + gaugeHeight - ((fahrenheitTick + 30) / 230) * gaugeHeight;
 
       if(i <= 50) ctx.fillStyle = "blue";
+      else if(i >50  && i < 68) ctx.fillStyle = "lightblue";
       else if(i >=68  && i <= 77) ctx.fillStyle = "orange";
       else ctx.fillStyle = "red";
 
       ctx.fillText(i + "°F", gaugeX + gaugeWidth + 10, tickY + 5);
     }
   }
+
+
+
+
 
   updateGauge(event: MouseEvent) {
     const canvas = document.getElementById("gauge") as HTMLCanvasElement;
