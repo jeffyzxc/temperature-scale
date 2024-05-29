@@ -89,7 +89,7 @@ export class TemperatureScaleChartComponent implements AfterViewInit, ControlVal
 
     if(celsius <= 10) ctx.fillStyle = "blue";
     else if(celsius >10 && celsius <= 19.9) ctx.fillStyle = "lightblue";
-    else if(celsius >20 && celsius <= 25) ctx.fillStyle = "orange";
+    else if(celsius >=20 && celsius <= 25) ctx.fillStyle = "orange";
     else ctx.fillStyle = "red";
 
     ctx.fillRect(gaugeX, gaugeY + gaugeHeight - barHeight, gaugeWidth, barHeight);
@@ -100,7 +100,7 @@ export class TemperatureScaleChartComponent implements AfterViewInit, ControlVal
       const tickY = gaugeY + gaugeHeight - ((i + 30) / 230) * gaugeHeight;
 
       if(i <= 10) ctx.fillStyle = "blue";
-      else if(i >10 && i <= 19.99) ctx.fillStyle = "lightblue";
+      else if(i >10 && i <= 19.99 ) ctx.fillStyle = "lightblue";
       else if(i >=20 && i <= 25) ctx.fillStyle = "orange";
       else ctx.fillStyle = "red";
 
